@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validasi Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .error { color: red; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <h2>Form Login</h2>
+    <form id="loginForm">
+        <label for="email">Email:</label>
+        <input type="text" id="email">
+        <p id="emailError" class="error"></p>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password">
+        <p id="passwordError" class="error"></p>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Mencegah submit otomatis
+
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+
+            let emailError = document.getElementById("emailError");
+            let passwordError = document.getElementById("passwordError");
+
+            emailError.innerHTML = ""; // Reset pesan error
+            passwordError.innerHTML = "";
+
+            // Validasi Email (harus mengandung '@' dan '.')
+            if (!email.includes("@") || !email.includes(".")) {
+                emailError.innerHTML = "Email tidak valid";
+            }
+
+            // Validasi Password (minimal 8 karakter)
+            if (password.length < 8) {
+                passwordError.innerHTML = "Password terlalu pendek, minimal 8 karakter";
+            }
+
+            // Jika tidak ada error, bisa lanjut submit form
+            if (emailError.innerHTML === "" && passwordError.innerHTML === "") {
+                alert("Login berhasil!");
+            }
+        });
+    </script>
+</body>
+</html>
